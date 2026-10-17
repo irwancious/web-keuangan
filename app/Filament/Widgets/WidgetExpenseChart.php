@@ -20,11 +20,11 @@ class WidgetExpenseChart extends ChartWidget
     {
         $startDate = ! is_null($this->pageFilters['startDate'] ?? null) ?
             Carbon::parse($this->pageFilters['startDate']) :
-            null;
+            now()->startOfMonth();
 
         $endDate = ! is_null($this->pageFilters['endDate'] ?? null) ?
             Carbon::parse($this->pageFilters['endDate']) :
-            now();
+            now()->endOfDay();
 
         $data = Trend::query(Transaction::expenses())
             ->between(
